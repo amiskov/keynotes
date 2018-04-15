@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Функции в JS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Andrey Miskov">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../reveal/css/reveal.css">
+    <link rel="stylesheet" href="../reveal/css/theme/white.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal/lib/css/github.css">
+    <!-- Printing and PDF exports -->
+    <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../reveal/css/print/pdf.css' : '../reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section data-background="#f6de38">
+                <h2>Функции в&nbsp;JavaScirpt</h2>
+                <h4>История, терминология,<br>примеры</h4>
+            </section>
+            <section>
+                <img style="margin: 0" src="img/problems_and_me.png" alt="">
+            </section>
+            <section>
+                <h2>Задачи разрешимости</h2>
+                <p>Требуют ответа «да» или «нет».</p>
+                <blockquote>Делится ли x на у без остатка?</blockquote>
+            </section>
+            <section>
+                <h2>Проблема разрешения</h2>
+                <h4>Давид Гильберт, 1928</h4>
+                <p>Можно ли решить какую-либо задачу разрешимости за конечное число шагов?</p>
+                <blockquote>
+                    Решаема ли задача «Делится ли x на y без остатка», если x=100 и y=200?
+                </blockquote>
+            </section>
+            <section>
+                <h2>Проблема разрешения</h2>
+                <p style="text-align: left;">На входе:</p>
+                <ul>
+                    <li>формальный язык</li>
+                    <li>утверждение на этом языке</li>
+                </ul>
+                <p>Нужно определить, является ли это утверждение истинным или ложным.</p>
+            </section>
+            <section>
+                <h2>Зачем разбираться?</h2>
+                <p>Например, чтобы понять, что могут делать вычислительные машины (англ. <i>computer</i>), а чего не могут.</p>
+            </section>
+            <section>
+                <img src="img/church.jpg" alt="">
+                <img src="img/turing.jpg" alt="">
+                <h2>
+                    Чёрч и Тьюринг
+                </h2>
+            </section>
+            <section>
+                <h2>Результаты</h2>
+                <p class="fragment">Не существует способа определить, решаема ли задача разрешимости.</p>
+                <p class="fragment"><b>Тем не менее</b>, вычислительный аппарат сможет решить любые задачи, если представить их в виде конечной последовательности действий (алгоритма).</p>
+            </section>
+            <section>
+                <h2>Инструменты</h2>
+                <table>
+                    <thead>
+                        <th>Чёрч</th>
+                        <th>Тьюринг</th>
+                    </thead>
+                    <tbody>
+                        <td>λ-исчисление</td>
+                        <td>Машина Тьюринга</td>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>λ-исчисление</h2>
+            </section>
+
+            <section>
+                <p>Нужно придумать аппарат, который может вычислять.</p>
+                <p class="fragment">Функции подойдут.</p>
+                <p class="fragment">Осталось только формализовать...</p>
+            </section>
+
+            <section>
+                <h2>1, 2, 3, 4, 5 — начинаем формализовать</h2>
+            </section>
+
+            <section>
+                <p><i>x<sup>2</sup> + 5x + 7</i> <span class="fragment">— это выражение. Но что здесь x?</span></p>
+                <p class="fragment"><i>f(x) = x<sup>2</sup> + 5x + 7</i> <span class="fragment">— устоявшееся объявление функции. Так уже понятно, что вместо x можно что-то подставлять.</span></p>
+                <p class="fragment"><i>f(4) = 4<sup>2</sup> + 5*4 + 7</i></p>
+                <p class="fragment">А как представить выражение с переменной, которое принимает значение?</p>
+            </section>
+
+            <section>
+                <p>Например, так:<br>
+                    <i>[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p class="fragment">А если переменных будет несколько?</p>
+                <p class="fragment">
+                    <i>[x<sup>2</sup> + 5x + 7<b>y</b>](4, <b>5</b>)</i>
+                </p>
+            </section>
+
+            <section>
+                <h2>Что предложил Чёрч</h2>
+                <p><i>^x[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p class="fragment"><i>^x^y[x<sup>2</sup> + 5x + 7y](4, 5)</i></p>
+            </section>
+
+            <section>
+                <h2>Крышки стали лямбдами</h2>
+                <p><i>λx[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p><i>λxλy[x<sup>2</sup> + 5x + 7y](4, 5)</i></p>
+            </section>
+            <section>
+                <h2>Упрощаем</h2>
+                <p><i>λx.x<sup>2</sup> + 5x + 7 4</i></p>
+                <p><i>λx.λy.x<sup>2</sup> + 5x + 7y 4 5</i></p>
+            </section>
+            <section>
+                <h2><span style="color: darkviolet;">Упро</span><i>щаем</i></h2>
+                <p><i><b style="color: darkviolet;">λx.</b>x<sup>2</sup> + 5x + 7 <b>4</b></i></p>
+                <p><i><b style="color: darkviolet;">λx.λy.</b>x<sup>2</sup> + 5x + 7y <b>4 5</b></i></p>
+            </section>
+
+            <section>
+                <p>Одного аргумента на функцию хватит для всех возможных вычислений.</p>
+                <p class="fragment"><code>F(x,y)</code> эквивалентно <code>(f(x))(y)</code></p>
+                <p class="fragment"><i>λx[λy[x<sup>2</sup> + 5x + 7y]](4)(5)</b></i></p>
+            </section>
+            <section>
+<pre><code class="hljs javascript">
+(function (x, y) {
+    return x**2 + 5*x + 7*y
+})(4, 5); // 71
+
+</code></pre>
+
+<pre class="fragment"><code class="hljs javascript">
+(function (x) {
+    return function (y) {
+        return x**2 + 5*x + 7*y
+    }
+})(4)(5); // 71
+
+</code></pre>
+            </section>
+            <section>
+                <h2>Свободные и связанные переменные</h2>
+                <p class="fragment">Лямбда-функция связывает переменные.</p>
+                <p class="fragment">Привет, окружение и замыкание.</p>
+            </section>
+            <section>
+                <p>Функции эквивалентны значениям. Их можно передавать как аргументы и возвращать как результат вычислений.</p>
+                <p><i>λx[x<sup>2</sup> + 5x + 7](λz[z+1])(3)</i></p>
+            </section>
+
+            <section>
+                <h2>Привет, колбэки!</h2>
+<pre><code class="hljs javascript">
+    [-1, 0, -3, 2, 3]
+        .filter(function(n) {
+            return n > 0
+        })
+
+</code></pre>
+            </section>
+
+            <section>
+                <blockquote>Возможно, у этой системы найдутся приложения не только в роли логического исчисления.
+                    <br>— Алонзо Чёрч, 1932</blockquote>
+            </section>
+
+            <section>
+                <h2>Машина Тьюринга</h2>
+                <iframe width="510" height="287" src="https://www.youtube.com/embed/B2H1lMfpmfA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </section>
+
+            <section>
+                <h2>Архитектура ЭВМ</h2>
+                <p>Машину Тьюринга можно собрать руками, лямбда-исчисление — абстрактный аппарат.</p>
+                <p class="fragment">Императивность для компьютеров естественнее, чем декларативность.</p>
+            </section>
+
+            <section>
+                <p>Такое пишется чаще:</p>
+<pre><code class="hljs javascript">
+    let sum = 0;
+    for (let i = 0; i <= 100; i++) {
+        sum += i;
+    }
+
+</code></pre>
+
+<div class="fragment">
+    <p>чем такое:</p>
+<pre><code class="hljs javascript">
+    (function sum(n, acc) {
+        return (n == 0) ? acc : sum(n - 1, acc + n);
+    })(100, 0)
+
+</code></pre>
+</div>
+            </section>
+
+            <section>
+                <img src="img/mccarthy.jpg" alt=""><br>
+                <h2>Lisp</h2>
+            </section>
+
+            <section>
+               <p><b>λx.λy.</b>x<sup>2</sup> + 5x + 7y <b>4 5</b></p>
+<pre><code class="hljs lisp">
+    ((lambda (x y)
+       (+ (expt x 2) (* 5 x) (* 7 y))) 4 5) ; 71
+
+</code></pre>
+
+            </section>
+
+            <section>
+                <h2>Лисп-машина</h2>
+                <p><img src="img/lisp-machine.jpg" alt=""></p>
+            </section>
+
+            <section>
+                <h2>Впервые на Лисп-машинах</h2>
+                <ul>
+                    <li>Сборка мусора</li>
+                    <li>Лазерная печать</li>
+                    <li>Многооконный графический интерфейс пользователя</li>
+                    <li>Растровая графика высокого разрешения</li>
+                    <li>Рендеринг</li>
+                    <li>Множество сетевых инноваций.</li>
+                </ul>
+            </section>
+
+            <section data-background="#f6de38">
+                <h1>JS</h1>
+                <h4>Come and put Scheme into the Browser!</h4>
+            </section>
+
+            <section>
+                <h4>Three Magic Words</h4>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/-00X6Me-y7U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </section>
+            <section>
+                <h2>JS = Lisp + Self</h2>
+                <h4>+ синтаксис а-ля Java</h4>
+            </section>
+
+            <section>
+                <blockquote style="width: auto">
+                    <p>The strength of JavaScript is that you can do anything.</p>
+                    <p>The weakness is that you will.</p>
+                    <p>— Reg Braithwaite</p>
+                </blockquote>
+            </section>
+
+
+            <section>
+                <h2>Функции — из Лиспа</h2>
+                <p>Имеем λ-исчисление с императивностью</p>
+            </section>
+
+            <section>
+                <h2>Функции — данные</h2>
+<pre><code class="hljs javascript">
+    const checker = n => n > 0
+    [-1, 0, -3, 2, 3].filter(checker)
+
+</code></pre>
+</section>
+            <section>
+<pre><code class="hljs javascript">
+    // Функциональное выражение (Function Expression)
+    const checker = n => n > 0
+
+    // Объявление функции (Function Declaration)
+    function checker (n) { return n > 0 }
+
+    // Функция высшего порядка (Higher-Order Function)
+    [-1, 0, -3, 2, 3].filter(checker)
+
+</code></pre>
+            </section>
+            <section>
+                <h2>Люди второго сорта</h2>
+                <ul>
+                    <li>Живут отдельно</li>
+                    <li>Отдельные места в транспорте</li>
+                    <li>Нельзя входить в некоторые общественные места</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Сущности второго сорта</h2>
+                <ul>
+                    <li>Нельзя передать параметром</li>
+                    <li>Нельзя сохранить в переменную</li>
+                    <li>Нельзя вернуть в качестве результата вычисления</li>
+                </ul>
+            </section>
+
+            <section>
+                <!-- <img height="300" src="img/kulak.jpg" alt=""> -->
+                <blockquote>Собакам и китайцам вход запрещен</blockquote>
+            </section>
+
+
+            <section>
+                <h4>Функции в JS — сущности первого класса</h4>
+                <p>First Class Entities (First Class Objects)</p>
+                <ul>
+                    <li>Передаются как аргумент</li>
+                    <li>Сохраняются в переменную</li>
+                    <li>Возвращаются из функции [высшего порядка]</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Функции высшего порядка</h4>
+                <p>Higher-Order Function</p>
+                <ul>
+                    <li>Принимают функцию как аргумент</li>
+                    <li>Возвращают функцию как результат вычислений</li>
+                </ul>
+<pre><code class="hljs javascript">
+    [-1, 0, -3, 2, 3].filter(n => n > 0)
+
+</code></pre>
+</section>
+
+            <section>
+<pre><code class="hljs jsx">state = { openItemId: null }
+
+// Возвращаем обработчик клика, принимающий `ev`,
+// предварительно замкнув в нем `openItemId`
+toggleOpenItem = openItemId => ev => {
+    this.setState({
+        openItemId: this.isItemOpened(openItemId) ? null : openItemId
+    })
+} // не нужно bind(this)
+
+render() { return &lt;Component toggleOpenItem={this.toggleOpenItem} /&gt; }
+</code></pre>
+</section>
+
+
+            <section>
+                    <h4>Именованное функциональное выражение</h4>
+                    <p>Удобно для рекурсии</p>
+<pre><code class="hljs javascript">
+    const sumOf = function fn (acc) {
+      return acc == 0 ? acc : acc + fn(acc - 1)
+    }
+    sumOf(10) // 55
+
+</code></pre>
+            </section>
+
+            <section>
+                <h4>Функция с вызовом на месте</h4>
+                <p>Immediately Invoked Function Expression, IIFE</p>
+<pre><code class="hljs javascript">
+    var Module = (function (window, undefined) {
+        const private = 'secret'
+        const public = 'It is not a ' + private
+
+        // Отдаем наружу только то, что нужно
+        return { public: public }
+    })(window, undefined);
+
+    console.info(Module.public)
+    console.info(Module.private) // undefined
+
+</code></pre>
+            </section>
+
+            <section>
+                <h4>Самовызывающаяся функция</h4>
+                <p>Self-executing function (не путать с IIFE)</p>
+<pre><code class="hljs javascript">
+    const sum = function fn (acc) {
+      return acc == 0 ? acc : acc + fn(acc - 1)
+    }
+    sum(10) // 55
+
+</code></pre>
+            </section>
+
+            <section>
+                <h4>Самовызывающаяся функция с&nbsp;вызовом на месте</h4>
+                <p>Все сразу</p>
+<pre><code class="hljs javascript">
+    (function fn (acc) {
+      return acc == 0 ? acc : acc + fn(acc - 1)
+    })(10)
+
+</code></pre>
+            </section>
+
+            <section>
+                <h2>Итого</h2>
+                <ul>
+                    <li>λ-исчисление и машина Тьюринга породили два подхода к созданию языков программирования.</li>
+                    <li>JS < Lisp < λ-исчисление.</li>
+                    <li>В JS много всего можно делать с функциями.</li>
+                </ul>
+            </section>
+
+            <section>
+                <blockquote style="width: auto">
+                    <p>ООП и функциональное программирование могут быть полностью совместимыми (и должны быть!).
+                    <p>Нам лишь нужно понять, что «компьютеры — это симуляторы» и разобраться, что же симулировать.</p>
+                    <p>— Алан Кей, создатель ООП</p></blockquote>
+                <small>Из ответа на вопрос «<a href="https://ru.hexlet.io/blog/posts/why-fp-seen-as-opposite-of-OOP">Почему функциональное программирование считают противоположностью ООП, а не дополнением?</a>»</small>
+            </section>
+
+            <section>
+                <h2>Конец</h2>
+                <p>Спасибо за внимание</p>
+                <p>amiskov@ya.ru, <a href="http://andreymiskov.ru">andreymiskov.ru</a></p>
+            </section>
+
+        </div>
+    </div>
+    <script src="../reveal/lib/js/head.min.js"></script>
+    <script src="../reveal/js/reveal.js"></script>
+    <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+    </script>
+</body>
+
+</html>
