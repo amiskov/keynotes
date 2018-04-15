@@ -46,6 +46,7 @@
                 <blockquote>
                     Решаема ли задача «Делится ли x на y без остатка», если x=100 и y=200?
                 </blockquote>
+
             </section>
             <section>
                 <h2>Проблема разрешения</h2>
@@ -139,11 +140,12 @@
             </section>
 
             <section>
-                <p>Одного аргумента на функцию хватит для всех возможных вычислений.</p>
-                <p class="fragment"><code>F(x,y)</code> эквивалентно <code>(f(x))(y)</code></p>
+                <p>Одного аргумента на функцию <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%80%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">хватит</a> для всех возможных вычислений.</p>
+                <p><code>F(x,y)</code> эквивалентно <code>(f(x))(y)</code></p>
                 <p class="fragment"><i>λx[λy[x<sup>2</sup> + 5x + 7y]](4)(5)</b></i></p>
             </section>
             <section>
+<p>Было: функция от двух аргументов</p>
 <pre><code class="hljs javascript">
 (function (x, y) {
     return x**2 + 5*x + 7*y
@@ -151,18 +153,20 @@
 
 </code></pre>
 
-<pre class="fragment"><code class="hljs javascript">
+<div class="fragment">
+<p>Стало: две функции от одного аргумента</p>
+<pre><code class="hljs javascript">
 (function (x) {
     return function (y) {
         return x**2 + 5*x + 7*y
     }
 })(4)(5); // 71
 
-</code></pre>
+</code></pre></div>
             </section>
             <section>
                 <h2>Свободные и связанные переменные</h2>
-                <p class="fragment">Лямбда-функция связывает переменные.</p>
+                <p class="fragment">Лямбда-функция связывает переменную.</p>
                 <p class="fragment">Привет, окружение и замыкание.</p>
             </section>
             <section>
@@ -252,7 +256,7 @@
 
             <section data-background="#f6de38">
                 <h1>JS</h1>
-                <h4>Come and put Scheme into the Browser!</h4>
+                <h4>Come and put Scheme<br>into the Browser!</h4>
             </section>
 
             <section>
@@ -266,15 +270,15 @@
 
             <section>
                 <blockquote style="width: auto">
-                    <p>The strength of JavaScript is that you can do anything.</p>
-                    <p>The weakness is that you will.</p>
+                    <p>The strength of JavaScript is that you can do anything.<br>
+                    The weakness is that you will.</p>
                     <p>— Reg Braithwaite</p>
                 </blockquote>
             </section>
 
 
             <section>
-                <h2>Функции — из Лиспа</h2>
+                <h3>Функции пришли из Лиспа</h3>
                 <p>Имеем λ-исчисление с императивностью</p>
             </section>
 
@@ -287,6 +291,7 @@
 </code></pre>
 </section>
             <section>
+                <h2>Определения</h2>
 <pre><code class="hljs javascript">
     // Функциональное выражение (Function Expression)
     const checker = n => n > 0
@@ -320,12 +325,13 @@
             <section>
                 <!-- <img height="300" src="img/kulak.jpg" alt=""> -->
                 <blockquote>Собакам и китайцам вход запрещен</blockquote>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VRruW_vOb4s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </section>
 
 
             <section>
                 <h4>Функции в JS — сущности первого класса</h4>
-                <p>First Class Entities (First Class Objects)</p>
+                <p>First Class Entities or First Class Objects</p>
                 <ul>
                     <li>Передаются как аргумент</li>
                     <li>Сохраняются в переменную</li>
@@ -347,6 +353,7 @@
 </section>
 
             <section>
+                <h2>Пример</h2>
 <pre><code class="hljs jsx">state = { openItemId: null }
 
 // Возвращаем обработчик клика, принимающий `ev`,
@@ -432,6 +439,17 @@ render() { return &lt;Component toggleOpenItem={this.toggleOpenItem} /&gt; }
                 <small>Из ответа на вопрос «<a href="https://ru.hexlet.io/blog/posts/why-fp-seen-as-opposite-of-OOP">Почему функциональное программирование считают противоположностью ООП, а не дополнением?</a>»</small>
             </section>
 
+            <section data-markdown>
+                ## Материалы
+                - Ч. Петцольд «Читаем Тьюринга», глава 15
+                - [The Lambda Calculus](https://plato.stanford.edu/entries/lambda-calculus/)
+                - [Lambda Calculus - Computerphile](https://youtu.be/eis11j_iGMs)
+                - [A Brief History of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
+                - [Тьюринг, Алан Матисон](http://www.krugosvet.ru/enc/gumanitarnye_nauki/lingvistika/TYURING_ALAN_MATISON.html)
+                - [Милый видос](https://youtu.be/92WHN-pAFCs), который доступно объясняет доказательство Тьюринга. К нему есть [FAQ](http://www.zutopedia.com/halting_problem.html#faq).
+
+            </section>
+
             <section>
                 <h2>Конец</h2>
                 <p>Спасибо за внимание</p>
@@ -454,7 +472,11 @@ render() { return &lt;Component toggleOpenItem={this.toggleOpenItem} /&gt; }
 
         // More info https://github.com/hakimel/reveal.js#dependencies
         dependencies: [
-            { src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+            { src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            // Interpret Markdown in <section> elements
+        { src: '../reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
         ]
     });
     </script>
