@@ -34,32 +34,21 @@
 <!--             <section>
                 <img style="margin: 0" src="img/problems_and_me.png" alt="">
             </section>
- -->            <section>
-                <h2>Задачи разрешимости</h2>
-                <p>Требуют ответа «да» или «нет».</p>
-                <blockquote>Делится ли x на у без остатка?</blockquote>
-            </section>
+ -->
             <section>
                 <h2>Проблема разрешения</h2>
                 <h4>Давид Гильберт, 1928</h4>
-                <p>Можно ли решить какую-либо задачу разрешимости за конечное число шагов?</p>
-                <blockquote>
-                    Решаема ли задача «Делится ли x на y без остатка», если x=100 и y=200?
-                </blockquote>
-
+                <p>Может ли существовать какой-то способ проверить, является ли данное арифметическое утверждение доказуемым или не доказуемым.</p>
+                <p><a href="https://ru.wikipedia.org/wiki/Проблема_разрешения">Вики</a></p>
             </section>
             <section>
-                <h2>Проблема разрешения</h2>
-                <p style="text-align: left;">На входе:</p>
-                <ul>
-                    <li>формальный язык</li>
-                    <li>утверждение на этом языке</li>
-                </ul>
-                <p>Нужно определить, является ли это утверждение истинным или ложным.</p>
+                <p>Может ли существовать такой алгоритм, который примет на вход другой алгоритм и скажет, нормальный этот принятый алгоритм или кривой?</p>
+                <p>Существует ли способ понять, может ли этот входящий алгоритм выдать в итоге ответ или он зависнет?</p>
+                <p><small><a href="https://ru.wikipedia.org/wiki/Алгоритмическая_разрешимость">Алгоритмическая разрешимость</a>, <a href="https://ru.wikipedia.org/wiki/Проблема_остановки">Проблема остановки</a></small></p>
             </section>
             <section>
                 <h2>Зачем разбираться?</h2>
-                <p>Например, чтобы понять, что могут делать вычислительные машины (англ. <i>computer</i>), а чего не могут.</p>
+                <p>Например, чтобы понять, что смогут сделать ЭВМ, а чего не могут.</p>
             </section>
             <section>
                 <img src="img/church.jpg" alt="">
@@ -67,12 +56,13 @@
                 <h2>
                     Чёрч и Тьюринг
                 </h2>
+                <p>И еще <a href="https://ru.wikipedia.org/wiki/Машина_Поста">Пост</a>.</p>
             </section>
             <section>
-                <h2>Результаты</h2>
-                <p class="fragment">Не существует способа определить, решаема ли задача разрешимости.</p>
-                <p class="fragment"><b>Тем не менее</b>, вычислительный аппарат сможет решить любые задачи, если представить их в виде конечной последовательности действий (алгоритма).</p>
+                <p>Не существует алгоритма, определяющего является ли данное арифметическое утверждение доказуемым или не доказуемым.</p>
+                <p><small><a href="https://ru.wikipedia.org/wiki/Теорема_Чёрча_—_Тьюринга">Тезис Черча-Тьюринга</a></small></p>
             </section>
+
             <section>
                 <h2>Инструменты</h2>
                 <table>
@@ -88,59 +78,45 @@
             </section>
 
             <section>
-                <h2>λ-исчисление</h2>
+                <h2><span style="text-transform: lowercase;">λ</span>-исчисление</h2>
+                <p>Формальный аппарат, придуманный для анализа вычислимости. Основа — анонимная функция от одного аргумента.</p>
             </section>
 
             <section>
-                <p>Нужно придумать аппарат, который может вычислять.</p>
-                <p class="fragment">Функции подойдут.</p>
-                <p class="fragment">Осталось только формализовать...</p>
+                <p><i>x<sup>2</sup> + 5x + 7</i> — выражение. Но что здесь x?</p>
+                <p class="fragment"><i>f(x) = x<sup>2</sup> + 5x + 7</i> — общепринятое обозначение того, что вместо x можно что-то подставлять.<br>
+                <i>f(4) = 4<sup>2</sup> + 5&times;4 + 7</i></p>
+                <p class="fragment">А как представить выражение с переменной, которое сразу же принимает ее значение?</p>
             </section>
 
             <section>
-                <h2>1, 2, 3, 4, 5 — начинаем формализовать</h2>
-            </section>
-
-            <section>
-                <p><i>x<sup>2</sup> + 5x + 7</i> <span class="fragment">— это выражение. Но что здесь x?</span></p>
-                <p class="fragment"><i>f(x) = x<sup>2</sup> + 5x + 7</i> <span class="fragment">— устоявшееся объявление функции. Так уже понятно, что вместо x можно что-то подставлять.</span></p>
-                <p class="fragment"><i>f(4) = 4<sup>2</sup> + 5*4 + 7</i></p>
-                <p class="fragment">А как представить выражение с переменной, которое принимает значение?</p>
-            </section>
-
-            <section>
-                <p>Например, так:<br>
-                    <i>[x<sup>2</sup> + 5x + 7](4)</i></p>
-                <p class="fragment">А если переменных будет несколько?</p>
-                <p class="fragment">
+                <p>Например, так:<br> <i>[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p class="fragment">А для нескольких переменных так:<br>
                     <i>[x<sup>2</sup> + 5x + 7<b>y</b>](4, <b>5</b>)</i>
                 </p>
             </section>
 
             <section>
-                <h2>Что предложил Чёрч</h2>
-                <p><i>^x[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p>Изначальный вариант Чёрча<br>
+                <i>^x[x<sup>2</sup> + 5x + 7](4)</i></p>
                 <p class="fragment"><i>^x^y[x<sup>2</sup> + 5x + 7y](4, 5)</i></p>
             </section>
 
             <section>
-                <h2>Крышки стали лямбдами</h2>
-                <p><i>λx[x<sup>2</sup> + 5x + 7](4)</i></p>
+                <p>Потом крышки стали лямбдами<br>
+                    <small>(вроде как писать на машинке было проще и символ красивый)</small><br>
+                <i>λx[x<sup>2</sup> + 5x + 7](4)</i></p>
                 <p><i>λxλy[x<sup>2</sup> + 5x + 7y](4, 5)</i></p>
             </section>
             <section>
-                <h2>Упрощаем</h2>
-                <p><i>λx.x<sup>2</sup> + 5x + 7 4</i></p>
-                <p><i>λx.λy.x<sup>2</sup> + 5x + 7y 4 5</i></p>
-            </section>
-            <section>
-                <h2><span style="color: darkviolet;">Упро</span><i>щаем</i></h2>
-                <p><i><b style="color: darkviolet;">λx.</b>x<sup>2</sup> + 5x + 7 <b>4</b></i></p>
-                <p><i><b style="color: darkviolet;">λx.λy.</b>x<sup>2</sup> + 5x + 7y <b>4 5</b></i></p>
+                <p>Чёрч писал без скобок, но с подсветкой<br>
+                    <small>(любил разноцветные чернила)</small><br>
+                <i>λ<b style="color: darkviolet;">x</b>.x<sup>2</sup> + 5x + 7 <b style="color: darkviolet;">4</b></i></p>
+                <p><i>λ<b style="color: darkviolet;">x</b>.λ<b style="color: blue;">y</b>.x<sup>2</sup> + 5x + 7y <b style="color: darkviolet;">4</b> <b style="color: blue;">5</b></i></p>
             </section>
 
             <section>
-                <p>Одного аргумента на функцию <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%80%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">хватит</a> для всех возможных вычислений.</p>
+                <p>На самом деле одного аргумента <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%80%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">хватит</a> для всех возможных вычислений.</p>
                 <p><code>F(x,y)</code> эквивалентно <code>(f(x))(y)</code></p>
                 <p class="fragment"><i>λx[λy[x<sup>2</sup> + 5x + 7y]](4)(5)</b></i></p>
             </section>
@@ -165,6 +141,13 @@
 </code></pre></div>
             </section>
             <section>
+<p>Современный синтаксис</p>
+<pre><code class="hljs javascript">
+(x => y => x**2 + 5*x + 7*y)(4)(5); // 71
+
+</code></pre>
+            </section>
+            <section>
                 <h2>Свободные и связанные переменные</h2>
                 <p class="fragment">Лямбда-функция связывает переменную.</p>
                 <p class="fragment">Привет, окружение и замыкание.</p>
@@ -177,10 +160,7 @@
             <section>
                 <h2>Привет, колбэки!</h2>
 <pre><code class="hljs javascript">
-    [-1, 0, -3, 2, 3]
-        .filter(function(n) {
-            return n > 0
-        })
+    [-1, 0, -3, 2, 3].filter(n => n > 0)
 
 </code></pre>
             </section>
@@ -230,8 +210,8 @@
             <section>
                <p><b>λx.λy.</b>x<sup>2</sup> + 5x + 7y <b>4 5</b></p>
 <pre><code class="hljs lisp">
-    ((lambda (x y)
-       (+ (expt x 2) (* 5 x) (* 7 y))) 4 5) ; 71
+    ((λ (x y)
+        (+ (expt x 2) (* 5 x) (* 7 y))) 4 5) ; 71
 
 </code></pre>
 
@@ -279,7 +259,7 @@
 
             <section>
                 <h3>Функции пришли из Лиспа</h3>
-                <p>Имеем λ-исчисление с императивностью</p>
+                <p>Имеем λ-исчисление + императивность</p>
             </section>
 
             <section>
@@ -352,23 +332,6 @@
 </section>
 
             <section>
-                <h2>Пример</h2>
-<pre><code class="hljs jsx">state = { openItemId: null }
-
-// Возвращаем обработчик клика, принимающий `ev`,
-// предварительно замкнув в нем `openItemId`
-toggleOpenItem = openItemId => ev => {
-    this.setState({
-        openItemId: this.isItemOpened(openItemId) ? null : openItemId
-    })
-} // не нужно bind(this)
-
-render() { return &lt;Component toggleOpenItem={this.toggleOpenItem} /&gt; }
-</code></pre>
-</section>
-
-
-            <section>
                     <h4>Именованное функциональное выражение</h4>
                     <p>Удобно для рекурсии</p>
 <pre><code class="hljs javascript">
@@ -424,7 +387,7 @@ render() { return &lt;Component toggleOpenItem={this.toggleOpenItem} /&gt; }
             <section>
                 <h2>Итого</h2>
                 <p class="fragment">λ-исчисление и машина Тьюринга породили два подхода к созданию языков программирования: декларативный (функциональный) и императивный.</p>
-                <p class="fragment">λ-исчисление &rarr; Lisp &rarr; JavaScript.</p>
+                <p class="fragment">λ-исчисление &rarr; Lisp &rarr; Scheme &rarr; JS.</p>
                 <p class="fragment">В JS много всего можно делать с функциями.</p>
             </section>
 
