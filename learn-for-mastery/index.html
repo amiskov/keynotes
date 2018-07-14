@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Learning for Mastery VS Getting Shit Done</title>
+    <meta name="description" content="">
+    <meta name="author" content="Andrey Miskov">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../reveal/css/reveal.css">
+    <link rel="stylesheet" href="../reveal/css/theme/white.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal/lib/css/github.css">
+    <!-- Printing and PDF exports -->
+    <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../reveal/css/print/pdf.css' : '../reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <link rel="stylesheet" href="learn-vasya.css">
+    <script src="learn-vasya.js"></script>
+    <style>
+    section img {
+        max-height: 40vh !important;
+        border: none !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h3>Learning for Mastery<br>VS<br>Getting Shit Done</h3>
+            </section>
+            <section>
+                <img style="border: 0; box-shadow: none;" src="img/vasya.png" alt="">
+                <p>Вася
+                    <br>и его путь к успеху</p>
+            </section>
+            <section>
+                <ul>
+                    <li>Школа</li>
+                    <li class="fragment">Университет</li>
+                    <li class="fragment">Курсы в какой-нибудь компании</li>
+                    <li class="fragment">Стажировка</li>
+                    <li class="fragment">Проект</li>
+                    <li class="fragment"><i>Поехали!</i></li>
+                </ul>
+            </section>
+            <section>
+                <p>
+                    <img class="learning-vasya" height="100" src="img/vasya.png" alt="">
+                    <button class="learn-btn" id="btn" onclick="learnVasya('schoolProgress', schoolParts);">Обучить Васю в школе!</button>
+                </p>
+                <div id="schoolProgress" class="learning-progress"></div>
+            </section>
+            <section>
+                <p>
+                    <img class="learning-vasya" height="100" src="img/vasya.png" alt="">
+                    <button class="learn-btn" id="btn" onclick="learnVasya('univerProgress', univerParts);">Обучить Васю в универе!</button>
+                </p>
+                <div id="univerProgress" class="learning-progress"></div>
+            </section>
+            <section>
+                <p>
+                    <img class="learning-vasya" height="100" src="img/vasya.png" alt="">
+                    <button class="learn-btn" id="btn" onclick="learnVasya('coursesProgress', coursesParts);">Обучить Васю на курсах!</button>
+                </p>
+                <div id="coursesProgress" class="learning-progress"></div>
+            </section>
+            <section>
+                <p>
+                    <img class="learning-vasya" height="100" src="img/vasya.png" alt="">
+                    <button onclick="totalProgress('totalProgress')" class="">Посчитать общий результат</button>
+                </p>
+                <p id="totalProgress"></p>
+            </section>
+            <section>
+                <p>Васины знания</p>
+                <img src="img/killme.gif" alt="">
+            </section>
+            <section>
+                <p>Вася научился...
+                    <br>
+                    <span class="fragment">играть по правилам:</span>
+                </p>
+                <ul class="fragment">
+                    <li>Получать оценки</li>
+                    <li>Сдавать экзамены</li>
+                    <li>Проходить собеседования</li>
+                    <li>Находить код в интернете</li>
+                </ul>
+            </section>
+            <section>
+                <p>Со временем это проявляется</p>
+                <img src="img/wall_crack.jpg" alt="">
+            </section>
+            <section>
+                <p>Ничего, починим!</p>
+                <img src="img/crack_try_fix.jpg" alt="">
+            </section>
+            <section>
+                <p>Не чинится :-(</p>
+                <img src="img/crack_bigger.jpg" alt="">
+            </section>
+            <section>
+                <p>Васина работа</p>
+                <img src="img/house_destroyed.jpg" alt="">
+            </section>
+            <section>
+                <p>Результат подхода</p>
+                <h3>Learning for<br>Getting Shit Done</h3>
+            </section>
+            <section>
+                <p>Вася старался,
+                    <br>но его завели не туда...</p>
+            </section>
+            <section>
+                <img src="img/angry_panda.gif" alt="">
+            </section>
+            <section>
+                <h3>Обучение без пробелов</h3>
+                <p>(<a href="https://en.wikipedia.org/wiki/Mastery_learning">Learning for Mastery</a>)</p>
+            </section>
+            <section>
+                <ul>
+                    <li>Переход на новый уровень только после усвоения предыдущего.</li>
+                    <li class="fragment">Пересмотр материала, дополнительная поддержка от препода.</li>
+                    <li class="fragment">Небольшие задачи, но понятные от начала до конца.</li>
+                </ul>
+            </section>
+            <section>
+                <p>— Никакого ООП пока не научишься строить абстракции на функциях!</p>
+            </section>
+            <section>
+                <h3>Пошаговая подготовка JS-разработчика</h3>
+                <p>личный опыт + эксперименты на стажерах</p>
+            </section>
+            <section>
+                <p>Основы (1—3 года):</p>
+                <ul>
+                    <li><a href="https://code-basics.ru">Code Basics</a> — азы программирования.</li>
+                    <li><a href="http://learn.javascript.ru/">Учебник</a> (<a href="http://javascript.info/">английская версия</a> новее) и <a href="http://learn.javascript.ru/courses/js">курс</a> Кантора — детальное знакомство с синтаксисом, семантикой и идиоматикой языка.</li>
+                    <li><a href="https://ru.hexlet.io/">Хекслет</a> — тут уже учат программировать.</li>
+                </ul>
+            </section>
+            <section>
+                <p>Абстракции, управление сложностью</p>
+                <ul>
+                    <li> How to Code: <a href="https://www.edx.org/course/how-code-simple-data-ubcx-htc1x">Simple Data</a>, <a href="https://www.edx.org/course/how-code-complex-data-ubcx-htc2x">Complex Data</a>
+                        <li>СИКП: <a href="https://ru.hexlet.io/courses/sicp">курс на русском</a>, <a href="https://guides.hexlet.io/how-to-learn-sicp/">как изучать</a>, <a href="https://www.ozon.ru/context/detail/id/5322055/">книга на русском</a>, <a href="http://mitpress.mit.edu/sites/default/files/sicp/index.html">книга на английском</a>.</li>
+                        <li><a href="http://composingprograms.com">Composing Programs</a></li>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <p>Языки</p>
+                <ul>
+                    <li>Programming Languages: <a href="https://www.coursera.org/learn/programming-languages">Part A</a>, <a href="https://www.coursera.org/learn/programming-languages-part-b">Part B</a>, <a href="https://www.coursera.org/learn/programming-languages-part-c">Part C</a></li>
+                    <li><a href="https://papl.cs.brown.edu/2017/">Programming and Programming Languages</a></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Конец</h2>
+                <p>Спасибо за внимание</p>
+                <p><a href="http://andreymiskov.ru">andreymiskov.ru</a></p>
+            </section>
+        </div>
+    </div>
+    <script src="../reveal/lib/js/head.min.js"></script>
+    <script src="../reveal/js/reveal.js"></script>
+    <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            { src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            // Interpret Markdown in <section> elements
+            { src: '../reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+            { src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+
+        ]
+    });
+    </script>
+</body>
+
+</html>

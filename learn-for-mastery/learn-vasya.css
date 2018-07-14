@@ -1,0 +1,23 @@
+.learning-progress {
+    /*text-align: left;*/
+    /*margin-top: 50px !important;*/
+    font-size: 80% !important;
+}
+
+.learning-vasya {
+    display: block;
+    margin: 0 auto !important;
+}
+
+.learning-btn {
+    outline: none;
+}
+
+.learning-bar {
+    padding: 20px 0 !important;
+}
+
+section img {
+    border: none !important;
+    box-shadow: none !important;
+}
