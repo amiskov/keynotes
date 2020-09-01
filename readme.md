@@ -1,4 +1,5 @@
 # Презентации
+- [КУРСЫ ДЛЯ ВСЕХ, ДАРОМ, И ПУСТЬ НИКТО НЕ УЙДЁТ ОБИЖЕННЫЙ!](https://github.com/amiskov/keynotes/raw/master/kursy.pdf).
 - [Ahoy world!](https://github.com/amiskov/keynotes/raw/master/ahoy_world.pdf), язык Pyret — an outstanding choice for programming education.
 - [PL Party](https://github.com/amiskov/keynotes/raw/master/pl-party/pl-party.pdf), обзор функциональных языков, их особенностей и подходов к решению задач.
 - [Верстаем формочки](ui-forms). Как сделать формы более человечными.<br>1 декабря 2018. Есть 📹[видео](https://youtu.be/bNvwxg-dd0U).
