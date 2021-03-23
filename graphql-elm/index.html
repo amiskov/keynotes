@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Типы без границ: фронтенд-разработка с GraphQL и умным компилятором</title>
+    <meta name="description" content="">
+    <meta name="author" content="Andrey Miskov">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../reveal/css/reveal.css">
+    <link rel="stylesheet" href="../reveal/css/theme/white.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal/lib/css/github.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../reveal/css/print/pdf.css' : '../reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+        section img {
+            max-height: 40vh !important;
+            border: none !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Типы без границ</h1>
+            <h2>фронтенд-разработка с&nbsp;GraphQL и умным компилятором</h2>
+            <div>
+                <img height="42" src="img/graphql_logo.svg" alt="">
+                <img height="42" src="img/elm_logo.svg" alt="">
+            </div>
+        </section>
+        <section>
+            <h3>О чём доклад?</h3>
+            <p>Вроде про GraphQL и Elm...</p>
+        </section>
+        <section>
+            <h3>О чём доклад?</h3>
+            <p>На самом деле...</p>
+            <ul>
+                <li class="fragment">Сложность.</li>
+                <li class="fragment">Ограничения.</li>
+                <li class="fragment">Developer Experience.</li>
+                <li class="fragment">Trade-offs.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>План</h3>
+            <ol>
+                <li>Кратко про GraphQL.
+                <li>Кратко про Elm.
+                <li>GraphQL-типы в IDE разработчика: как рассказать компилятору, что ждёт БД от фронта.
+                <li>Выводы и впечатления от работы с таким стэком.
+                <li>Рекомендации желающим разобраться подробнее.
+            </ol>
+        </section>
+        <section>
+            <h3>GraphQl</h3>
+            <ul>
+                <li class="fragment">Гибкое API: фронтенду хорошо, бэкенду тоже неплохо</li>
+                <li class="fragment">Типизировано, документировано</li>
+                <li class="fragment">Спецификация: реализуй сам</li>
+                <li class="fragment">Запросы, мутации, подписки</li>
+                <li class="fragment"><i>Хорошо для агрегирования данных</i></li>
+            </ul>
+        </section>
+        <section>
+            <h3>Почему компилируют в JS?</h3>
+            <ul>
+                <li class="fragment">Что такое программирование?</li>
+                <li class="fragment">Управление сложностью.</li>
+                <li class="fragment">It's all about predictability.</li>
+                <li class="fragment"><em>В JS сложно управлять сложностью.</em></li>
+            </ul>
+        </section>
+        <section>
+            <blockquote style="text-align: left">
+                Managing complexity is the most important technical topic in software development. In my view, it's so
+                important that Software's Primary Technical Imperative has to be managing complexity. Complexity is not
+                a new feature of software development.
+                <p style="text-align: right">― Steve McConnell, Code Complete</p>
+            </blockquote>
+        </section>
+        <section>
+            <h3>Что можно убрать из языка?</h3>
+            <ul>
+                <li class="fragment">Циклы</li>
+                <li class="fragment">Присваивание</li>
+                <li class="fragment">Мутации</li>
+                <li class="fragment">Объекты</li>
+                <li class="fragment">Классы</li>
+                <li class="fragment">Return и множественный возврат</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Как так? 😱</h3>
+            <ul>
+                <li class="fragment">Циклы → Функции (рекурсия, HoF)</li>
+                <li class="fragment">Присваивание → Связывание</li>
+                <li class="fragment">Мутации → Иммутабельные структуры данных</li>
+                <li class="fragment">Объекты → Модули, замыкания</li>
+                <li class="fragment">Классы → Типы, мапы</li>
+                <li class="fragment">Return и множественный возврат → Единичный возврат без return</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Assignment</h3>
+            <pre class="javascript"><code>
+    // JS
+    let a = 1
+    function f() {
+        return a
+    }
+    a = 10
+    console.log(f()) // 10
+
+            </code></pre>
+        </section>
+        <section>
+            <h3>Binding/matching</h3>
+            <pre class="elixir"><code>
+    # Elixir (Elm не разрешает shadowing)
+    a = 1
+    f = fn -> a end
+    a = 10
+    f.() # 1
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Моделирование предметной области.</p>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: да-нет.</p>
+            <pre data-trim class="elm"><code data-trim data-noescape>
+                type Bool = True | False
+                if isReady then go() else stop()
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: светофор.</p>
+            <pre class="elm"><code data-trim data-noescape>
+                type TrafficLights = Red | Yellow | Green
+
+                tlAction : TrafficLights -> String
+                tlAction tl =
+                    case tl of
+                        Red -> "Stop"
+
+                        Yellow -> "Prepare"
+
+                        Green -> "Go"
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: загрузка данных</p>
+            <img src="img/http-request-states.svg" alt="">
+            <p><small><a href="https://elmprogramming.com/remote-data.html">источник</a></small></p>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: загрузка данных</p>
+            <pre><code data-trim class="elm">
+type RemoteData error value
+    = NotAsked
+    | Loading
+    | Failure error
+    | Success value
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: загрузка данных</p>
+            <pre><code class="elm" data-trim>
+viewPostsOrError : Model -> Html Msg
+viewPostsOrError model =
+    case model.posts of
+        RemoteData.NotAsked ->
+            text ""
+
+        RemoteData.Loading ->
+            h3 [] [ text "Loading..." ]
+
+        RemoteData.Success posts ->
+            viewPosts posts
+
+        RemoteData.Failure httpError ->
+            viewError (buildErrorMessage httpError)
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: загрузка данных</p>
+            <pre><code>
+type alias Model =
+    { posts : RemoteData Http.Error (List Post)
+    }
+
+type alias Post =
+    { id : Int
+    , title : String
+    , authorName : String
+    , authorUrl : String
+    }
+
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <p>Пример: GraphQL</p>
+            <pre><code class="elm" data-trim>
+type alias Profile =
+    { name : Maybe String
+    , account : Eos.Name
+    , avatar : Avatar
+    }
+
+selectionSet : SelectionSet Model GraphQl.Object.User
+selectionSet =
+    SelectionSet.succeed buildModel
+        |> with User.name
+        |> with User.account
+        |> with (Avatar.selectionSet User.avatar)
+
+            </code></pre>
+        </section>
+        <section>
+            <h3>Типы</h3>
+            <ul>
+                <li>Экспортируем схему из GraphQl.</li>
+                <li>Генерируем из неё Elm-модули.</li>
+                <li>Теперь компилятор знает, что ждёт сервер.</li>
+                <li>Код получается production ready без тестов.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>GraphQL + Elm</h3>
+            <p>Подробнее в этом докладе.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/memIRXFSNkU"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <p><small>Библиотека <a href="https://package.elm-lang.org/packages/dillonkearns/elm-graphql/latest">elm-graphql</a>.</small>
+            </p>
+        </section>
+        <section>
+            <p>— Что наша жизнь?.. 🤔</p>
+            <p class="fragment">— Trade-off. 🤷🏻‍♂️</p>
+        </section>
+        <section>
+            <h3>Когда пригодится GraphQL?</h3>
+            <ul>
+                <li class="fragment">Много источников данных.</li>
+                <li class="fragment">Много разных клиентов (веб, мобилы, внешнее API, ...).</li>
+                <li class="fragment">Когда задолбались создавать REST-эндпойнты.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Когда уходить от JS?</h3>
+            <p class="fragment">Когда есть разработчики, которые могут это обосновать.</p>
+            <p class="fragment">Когда нет уже никаких сил поддерживать кодовую базу.</p>
+        </section>
+        <section>
+            <h3>Simple is not Easy</h3>
+            <div style="display: flex">
+                <img src="img/taxi.jpg" alt="">
+                <ul>
+                    <li>Простое надёжнее лёгкого.</li>
+                    <li>Конкретное надёжнее обобщённого.</li>
+                    <li>Абстракции — хорошо, но в меру.</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h3>Контрольный вопрос</h3>
+            <ul>
+                <li class="fragment">Есть один бэкенд и одна БД.</li>
+                <li class="fragment">Есть один фронтенд — веб-сайт.</li>
+                <li class="fragment">На сайте, в основном, формы.</li>
+                <li class="fragment">Заказчик хочет использовать Elm и GraphQl.</li>
+                <li class="fragment">Ваши действия?</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Чем интересно ФП?</h3>
+            <div style="display: flex;" class="fragment">
+                <img src="img/lomonosov.jpg" alt="">
+                <blockquote>
+                    <p>А функциональное программирование уже затем учить следует, что оно ум в порядок приводит.</p>
+                    <p>— М.В. Ломоносов</p>
+                </blockquote>
+            </div>
+        </section>
+        <section>
+            <h3>Почему Elm стоит внимания?</h3>
+            <ul>
+                <li class="fragment">Чтобы понять, что значит «не всрато».</li>
+                <li class="fragment">Разобрать идеи Redux, Vuex и пр. в первоисточнике*.</li>
+                <li class="fragment">Строгий, но справедливый и дружелюбный компилятор прививает хорошие привычки.</li>
+                <li class="fragment">Просто и приятно программировать.</li>
+            </ul>
+            <p class="fragment"><small>*это всё уже было, только не в вебе</small></p>
+        </section>
+        <section>
+            <blockquote>
+            <p>Лучшие технологии — те, которые экономят время, силы и деньги.
+                <br>— Капитан</p>
+                <img src="img/kapitan.jpg" alt="">
+            </blockquote>
+        </section>
+        <section>
+            <h2>Конец</h2>
+            <p>Спасибо</p>
+            <ul>
+                <li><a href="https://amiskov.github.io/keynotes/">amiskov.github.io/keynotes</a></li>
+                <li><a href="https://elm-lang.org/">elm-lang.org</a></li>
+                <li><a href="https://graphql.org/">graphql.org</a></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<script src="../reveal/lib/js/head.min.js"></script>
+<script src="../reveal/js/reveal.js"></script>
+<script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            {
+                src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+
+</html>
