@@ -102,6 +102,14 @@
                 <li class="fragment">Return и множественный возврат</li>
             </ul>
         </section>
+        <section data-background="#000" data-background-image="../ogon/img/fire.gif" data-background-repeat="no-repeat" data-background-size="cover" data-background-position="center bottom">
+            <h3>Что можно убрать из языка?</h3>
+            <ul>
+            <li><code>null</code></li>
+            <li><code>undefined</code></li>
+            <li><code>NaN</code></li>
+            </ul>
+        </section>
         <section>
             <h3>Как так? 😱</h3>
             <ul>
@@ -109,32 +117,10 @@
                 <li class="fragment">Присваивание → Связывание</li>
                 <li class="fragment">Мутации → Иммутабельные структуры данных</li>
                 <li class="fragment">Объекты → Модули, замыкания</li>
-                <li class="fragment">Классы → Типы, мапы</li>
+                <li class="fragment">Классы → Типы, хэш-мапы</li>
                 <li class="fragment">Return и множественный возврат → Единичный возврат без return</li>
+                <li class="fragment"><code>null</code> → Явная обработка (<code>Maybe</code>/<code>Option</code>)</li>
             </ul>
-        </section>
-        <section>
-            <h3>Assignment</h3>
-            <pre class="javascript"><code>
-    // JS
-    let a = 1
-    function f() {
-        return a
-    }
-    a = 10
-    console.log(f()) // 10
-
-            </code></pre>
-        </section>
-        <section>
-            <h3>Binding/matching</h3>
-            <pre class="elixir"><code>
-    # Elixir (Elm не разрешает shadowing)
-    a = 1
-    f = fn -> a end
-    a = 10
-    f.() # 1
-            </code></pre>
         </section>
         <section>
             <h3>Типы</h3>
@@ -154,7 +140,6 @@
             <pre class="elm"><code data-trim data-noescape>
                 type TrafficLights = Red | Yellow | Green
 
-                tlAction : TrafficLights -> String
                 tlAction tl =
                     case tl of
                         Red -> "Stop"
@@ -185,7 +170,6 @@ type RemoteData error value
             <h3>Типы</h3>
             <p>Пример: загрузка данных</p>
             <pre><code class="elm" data-trim>
-viewPostsOrError : Model -> Html Msg
 viewPostsOrError model =
     case model.posts of
         RemoteData.NotAsked ->
@@ -199,23 +183,6 @@ viewPostsOrError model =
 
         RemoteData.Failure httpError ->
             viewError (buildErrorMessage httpError)
-            </code></pre>
-        </section>
-        <section>
-            <h3>Типы</h3>
-            <p>Пример: загрузка данных</p>
-            <pre><code>
-type alias Model =
-    { posts : RemoteData Http.Error (List Post)
-    }
-
-type alias Post =
-    { id : Int
-    , title : String
-    , authorName : String
-    , authorUrl : String
-    }
-
             </code></pre>
         </section>
         <section>
@@ -243,7 +210,7 @@ selectionSet =
                 <li>Экспортируем схему из GraphQl.</li>
                 <li>Генерируем из неё Elm-модули.</li>
                 <li>Теперь компилятор знает, что ждёт сервер.</li>
-                <li>Код получается production ready без тестов.</li>
+                <li>Код получается production ready [почти] без тестов.</li>
             </ul>
         </section>
         <section>
@@ -255,10 +222,6 @@ selectionSet =
                     allowfullscreen></iframe>
             <p><small>Библиотека <a href="https://package.elm-lang.org/packages/dillonkearns/elm-graphql/latest">elm-graphql</a>.</small>
             </p>
-        </section>
-        <section>
-            <p>— Что наша жизнь?.. 🤔</p>
-            <p class="fragment">— Trade-off. 🤷🏻‍♂️</p>
         </section>
         <section>
             <h3>Когда пригодится GraphQL?</h3>
@@ -274,15 +237,8 @@ selectionSet =
             <p class="fragment">Когда нет уже никаких сил поддерживать кодовую базу.</p>
         </section>
         <section>
-            <h3>Simple is not Easy</h3>
-            <div style="display: flex">
-                <img src="img/taxi.jpg" alt="">
-                <ul>
-                    <li>Простое надёжнее лёгкого.</li>
-                    <li>Конкретное надёжнее обобщённого.</li>
-                    <li>Абстракции — хорошо, но в меру.</li>
-                </ul>
-            </div>
+            <p>— Что наша жизнь?.. 🤔</p>
+            <p class="fragment">— Trade-off 🤷🏻‍♂️</p>
         </section>
         <section>
             <h3>Контрольный вопрос</h3>
@@ -293,6 +249,17 @@ selectionSet =
                 <li class="fragment">Заказчик хочет использовать Elm и GraphQl.</li>
                 <li class="fragment">Ваши действия?</li>
             </ul>
+        </section>
+        <section>
+            <h3>Simple is not Easy</h3>
+            <div style="display: flex">
+                <img src="img/taxi.jpg" alt="">
+                <ul>
+                    <li>Простое надёжнее лёгкого.</li>
+                    <li>Конкретное надёжнее обобщённого.</li>
+                    <li>Абстракции — хорошо, но в меру.</li>
+                </ul>
+            </div>
         </section>
         <section>
             <h3>Чем интересно ФП?</h3>
