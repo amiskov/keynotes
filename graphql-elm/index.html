@@ -186,6 +186,7 @@ type RemoteData error value
     | Failure error
     | Success value
             </code></pre>
+            <p><small><a href="http://blog.jenkster.com/2016/06/how-elm-slays-a-ui-antipattern.html">How Elm Slays a UI Antipattern</a></small></p>
         </section>
         <section>
             <h3>Типы</h3>
@@ -210,15 +211,14 @@ viewPostsOrError model =
             <h3>Типы</h3>
             <p>Пример: GraphQL</p>
             <pre><code class="elm" data-trim>
-type alias Profile =
+type alias User =
     { name : Maybe String
     , account : Eos.Name
     , avatar : Avatar
     }
 
-selectionSet : SelectionSet Model GraphQl.Object.User
 selectionSet =
-    SelectionSet.succeed buildModel
+    SelectionSet.succeed User
         |> with User.name
         |> with User.account
         |> with (Avatar.selectionSet User.avatar)
@@ -259,19 +259,8 @@ selectionSet =
             <p class="fragment">Когда нет уже никаких сил поддерживать кодовую базу на JS.</p>
         </section>
         <section>
-            <h3>Кстати о TypeScript</h3>
-            <ul class="font-size: 85%">
-            <li class="fragment">Там есть <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"><code>any</code></a>.</li>
-            <li class="fragment">Много [лишних] возможностей.</li>
-            <li class="fragment">Синтаксис а-ля JavaScript (много букв и скобок).</li>
-            <li class="fragment">Нужно выбирать библиотеки, подходы. В Elm всё всегда одинаково и встроено в язык.</li>
-            <li class="fragment"><a href="https://semver.org/">Semver</a> не контролируется. В Elm breaking changes не пройдут в минорной версии.</li>
-            </ul>
-        </section>
-        <section>
             <p>— Что наша жизнь?.. 🤔</p>
             <p class="fragment">— Trade-off 🤷🏻‍♂️</p>
-            <p class="fragment">Выбор инструментов — личное дело каждого и зависит от задач.</p>
         </section>
         <section>
             <h3>Контрольный вопрос</h3>
@@ -287,7 +276,7 @@ selectionSet =
             <h3>Simple is not Easy</h3>
             <div style="display: flex">
                 <img src="img/taxi.jpg" alt="">
-                <ul>
+                <ul style="margin-left: 4rem; font-size: 85%">
                     <li>Простое надёжнее лёгкого.</li>
                     <li>Конкретное надёжнее обобщённого.</li>
                     <li>Абстракции — хорошо, но в меру.</li>
@@ -316,8 +305,8 @@ selectionSet =
         </section>
         <section>
             <blockquote>
-            <p>Лучшие технологии — те, которые экономят время, силы и деньги.
-                <br>— Капитан</p>
+            <p style="text-align: left; padding: 0 1rem">Лучшие технологии — те, которые экономят время, силы и&nbsp;деньги.
+                <span style="display: block; text-align: right;">— Капитан</span></p>
                 <img src="img/kapitan.jpg" alt="">
             </blockquote>
         </section>
